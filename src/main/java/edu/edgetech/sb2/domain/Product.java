@@ -30,7 +30,11 @@ public class Product {
     public Product() {
     }
 
-    public String getDescription() {
+	public void setType(String type) {
+		this.type = (int)(Math.random()*4)+"";
+	}
+
+	public String getDescription() {
         return description;
     }
 
