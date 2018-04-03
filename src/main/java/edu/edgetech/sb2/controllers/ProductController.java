@@ -17,13 +17,12 @@ public class ProductController {
 
 	//	Use a service for when things get complicated.
 	//	more than just doing a findAll or delete
-
+	//	We could use the ProductRepository directly but we have a better sepearation of concerns
+	//	when we split the DB request servicing functions to a separate 'Service' class
+	@Autowired		//	@Autowired will request SpringBoot to find the ProductService class and instantiate one for us
+					//	and assign (INJECT) the class property with the value. This is Dependency Injection.
+					//	our class depends on this service
 	private ProductService productService;
-
-	@Autowired
-	public void setProductService(ProductService productService) {
-		this.productService = productService;
-	}
 
 	//  RequestMethod.GET is the default. It is optional
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
