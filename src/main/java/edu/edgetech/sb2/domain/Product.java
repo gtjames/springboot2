@@ -17,12 +17,14 @@ public class Product {
     private String description;
     private String imageUrl;
     private BigDecimal price;
+    private String  type;
 
     public Product( String productId, String description, String imageUrl, BigDecimal price ) {
         this.productId = productId;
         this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
+        this.type = (int)(Math.random()*4)+"";
     }
 
     public Product() {
