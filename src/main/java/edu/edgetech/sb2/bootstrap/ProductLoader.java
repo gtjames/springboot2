@@ -1,7 +1,7 @@
 package edu.edgetech.sb2.bootstrap;
 
 import edu.edgetech.sb2.domain.Product;
-import edu.edgetech.sb2.repositories.ProductRepository;
+import edu.edgetech.sb2.services.ProductService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +13,8 @@ import java.math.BigDecimal;
 
 @Component
 public class ProductLoader implements ApplicationListener<ContextRefreshedEvent> {
-
-    private ProductRepository productRepository;
-
 	@Autowired
-	public void setProductRepository(ProductRepository productRepository) {
-		this.productRepository = productRepository;
-	}
+    private ProductService productService;
 
 	private static final Logger log = LogManager.getLogger(ProductLoader.class);
 
@@ -42,7 +37,7 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
 		Product product;
 
 		product = new Product(productId, description, imageUrl, new BigDecimal( Math.random()*50 ));
-		productRepository.save(product);
+		productService.add(product);
 		log.info( "id: " + product.getId() + "  " + product.getDescription( ));
 	}
 }

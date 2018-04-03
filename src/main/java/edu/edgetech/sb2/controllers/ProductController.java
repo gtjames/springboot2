@@ -25,6 +25,7 @@ public class ProductController {
 		this.productService = productService;
 	}
 
+	//  RequestMethod.GET is the default. It is optional
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public String list(Model model){
 		model.addAttribute("products", productService.listAllProducts());

@@ -41,6 +41,11 @@ public class ProductService {
 		oProduct.ifPresent(product -> productRepository.delete(product));
 	}
 
+	public Product add(Product product) {
+		productRepository.save(product);
+		return product;
+	}
+
 	public Iterable<Product> listOddProducts() {
 		Iterable<Product> products = productRepository.findAll();
 		for(Iterator<Product> prodIterator = products.iterator(); prodIterator.hasNext();) {
