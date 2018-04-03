@@ -14,12 +14,8 @@ import java.util.Optional;
 @Service
 public class ProductService {
 
+	@Autowired
     private ProductRepository productRepository;
-
-    @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     public Iterable<Product> listAllProducts() {
         return productRepository.findAll();
@@ -44,6 +40,10 @@ public class ProductService {
 	public Product add(Product product) {
 		productRepository.save(product);
 		return product;
+	}
+
+	public Iterable<Product> findByType(String type) {
+		return productRepository.findByType(type);
 	}
 
 	public Iterable<Product> listOddProducts() {

@@ -74,4 +74,11 @@ public class ProductController {
 		System.out.println("Returning products:");
 		return "products";
 	}
+
+	@RequestMapping(value = "/type/{type}")
+	public String listOdd(@PathVariable String type, Model model){
+		model.addAttribute("products", productService.findByType(type));
+		System.out.println("Returning products:");
+		return "products";
+	}
 }
