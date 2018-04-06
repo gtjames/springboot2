@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by Edge Tech Academy on 12/2/2016.
@@ -15,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ProductController {
 
-	//	Use a service for when things get complicated.
-	//	more than just doing a findAll or delete
-	//	We could use the ProductRepository directly but we have a better sepearation of concerns
+	//	Use a service for when things get complicated more than just doing a findAll or delete.
+	//	We could go directly to the Entity Repository object (ProductReposity). It is after all a CrudRepository.
+	//	So it is very knowledgeable about accessing a database entity.
+	// 	But we have a better separation of concerns
 	//	when we split the DB request servicing functions to a separate 'Service' class
 	@Autowired		//	@Autowired will request SpringBoot to find the ProductService class and instantiate one for us
 					//	and assign (INJECT) the class property with the value. This is Dependency Injection.
@@ -28,21 +30,21 @@ public class ProductController {
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public String list(Model model){
 		model.addAttribute("products", productService.listAllProducts());
-		System.out.println("Returning Products:");
 		return "products";
 	}
 
 	@RequestMapping("product/{id}")
-	public String showProduct(@PathVariable Integer id, Model model){
+	public String show(@PathVariable Integer id, Model model){
+		//@RequestParam String thing,
 		if ( productService.getProductById(id) != null ) {
 			model.addAttribute("product", productService.getProductById(id));
 			return "productshow";
 		}
-		else return "404";
+		else {
+			return "404";
+		}
 	}
 
-	//	These items have been added for the new functionality
-	//		to make our app a richer MVC example
 	@RequestMapping("product/edit/{id}")
 	public String edit(@PathVariable Integer id, Model model){
 		model.addAttribute("product", productService.getProductById(id));
@@ -56,7 +58,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "product", method = RequestMethod.POST)
-	public String saveProduct(Product product){
+	public String save(Product product){
 		productService.saveProduct(product);
 		return "redirect:/product/" + product.getId();
 	}
@@ -67,17 +69,24 @@ public class ProductController {
 		return "redirect:/products";
 	}
 
+	//	These items have been added for the new functionality
+	//		to make our app a richer MVC example
 	@RequestMapping(value = "/oddProducts", method = RequestMethod.GET)
 	public String listOdd(Model model){
 		model.addAttribute("products", productService.listOddProducts());
-		System.out.println("Returning products:");
 		return "products";
 	}
 
 	@RequestMapping(value = "/type/{type}")
-	public String listOdd(@PathVariable String type, Model model){
+	public String byType(@PathVariable String type, Model model){
 		model.addAttribute("products", productService.findByType(type));
-		System.out.println("Returning products:");
 		return "products";
 	}
+
+	@RequestMapping(value = "/product/search", method = RequestMethod.POST)
+	public String search(@RequestParam String type, Model model){
+		model.addAttribute("products", productService.findByType(type));
+		return "products";
+	}
+
 }

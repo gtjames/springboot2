@@ -40,7 +40,7 @@
 		</dependency>
 		<!--
 			Generation Two - welcome the the 21st century
-				JPA - We want to access a database - Java Persistent A
+				JPA - We want to access a database - Java Persistence API
 				H2 	- An in-memory database that makes life and testing easy
 				MySQL - A real database used by a significant portion of the web world
 		-->

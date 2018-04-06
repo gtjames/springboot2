@@ -19,7 +19,17 @@ public class Product {
     private BigDecimal price;
     private String  type;
 
-    public Product( String productId, String description, String imageUrl, BigDecimal price ) {
+	@Override
+	public String toString() {
+		return "Product{" +
+				"id=" + id +
+				", productId='" + productId + '\'' +
+				", description='" + description + '\'' +
+				", type='" + type + '\'' +
+				'}';
+	}
+
+	public Product(String productId, String description, String imageUrl, BigDecimal price ) {
         this.productId = productId;
         this.description = description;
         this.imageUrl = imageUrl;

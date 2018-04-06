@@ -1,6 +1,8 @@
 package edu.edgetech.sb2.bootstrap;
 
+import edu.edgetech.sb2.domain.Customer;
 import edu.edgetech.sb2.domain.Product;
+import edu.edgetech.sb2.services.CustomerService;
 import edu.edgetech.sb2.services.ProductService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +17,9 @@ import java.math.BigDecimal;
 public class ProductLoader implements ApplicationListener<ContextRefreshedEvent> {
 	@Autowired
     private ProductService productService;
+
+	@Autowired
+	private CustomerService customerService;
 
 	private static final Logger log = LogManager.getLogger(ProductLoader.class);
 
@@ -31,6 +36,12 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
 		createProduct("299792458", 				"Edge Tech MySQL",		 	"/images/mysql.png"		);
 		createProduct("13.799±0.021*10^9", 		"Edge Tech Spring Boot",	"/images/spring.png"	);
 		createProduct("384400", 				"Edge Tech SQL", 			"/images/sql.png"		);
+
+		createCustomer("Edge Tech Academy", "8701 Bedford-Euless Rd", 	"682-334-5679");
+		createCustomer("First Command", 	"1 First Command Rd", 		"682-334-5679");
+		createCustomer("Acora Education", 	"8701 Bedford-Euless Rd", 	"682-334-5679");
+		createCustomer("American Airlines", "1 First Command Rd", 		"682-334-5679");
+		createCustomer("Homebid.com", 		"Scottsdale AZ", 			"801-225-2030");
 	}
 
 	public void createProduct(String productId, String description, String imageUrl ) {
@@ -38,6 +49,13 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
 
 		product = new Product(productId, description, imageUrl, new BigDecimal( Math.random()*50 ));
 		productService.add(product);
-		log.info( "id: " + product.getId() + "  " + product.getDescription( ));
+		log.info(product);
 	}
-}
+
+	public void createCustomer(String name, String address, String phoneNum ) {
+		Customer customer;
+
+		customer = new Customer(name, address, phoneNum);
+		customerService.saveCustomer(customer);
+		log.info(customer);
+	}}
