@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Edge Tech Java Spring Boot Framework</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <form class="form-horizontal" th:action="@{/customer/search}" method="post">
+        <div class="form-group">
+            <label class="col-sm-1 control-label">Phone #:</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="phoneNum"/>
+            </div>
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </div>
+    </form>
+    <div th:if="${not #lists.isEmpty(customers)}">
+        <h3>Customer List</h3>
+        <table class="table table-striped">
+            <tr>
+                <th>Customer Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="customer : ${customers}">
+                <td th:text="${customer.id}">Customer Id</td>
+                <td th:text="${customer.name}">Name</td>
+                <td th:text="${customer.address}">Address</td>
+                <td th:text="${customer.phoneNum}">Phone Number</td>
+                <!--	These items have been added for the new functionality-->
+                <!--		to make our app a richer MVC example-->
+                <td><a th:href="${ '/customer/'        + customer.id}">View</a></td>
+                <td><a th:href="${ '/customer/edit/'   + customer.id}">Edit</a></td>
+                <td><a th:href="${ '/customer/delete/' + customer.id}">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
