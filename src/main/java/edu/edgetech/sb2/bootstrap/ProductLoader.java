@@ -18,9 +18,15 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
 
 	private static final Logger log = LogManager.getLogger(ProductLoader.class);
 
+	/*
+	 *		 onApplicationEvent
+	 *			This method will be called when the application gets loaded
+	 *			It is a handler for the start up event
+	 */
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
+		//	see down below we have a small method to create Products for us
 		createProduct("112358132134", "Edge Tech Agile", "/images/agile.png");
 		createProduct("6.022140857×10^23", "Edge Tech C#", "/images/csharp.png");
 		createProduct("8.314459848", "Edge Tech CSS", "/images/css.png");
@@ -33,6 +39,13 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
 		createProduct("384400", "Edge Tech SQL", "/images/sql.png");
 	}
 
+	/*
+	 *		createProduct
+	 *			two step process here
+	 *			create the POJO.
+	 *			add the new product to our productService object
+	 *				this will take care of all the rest of the work of creating the row in the database
+	 */
 	public void createProduct(String productId, String description, String imageUrl) {
 		Product product;
 

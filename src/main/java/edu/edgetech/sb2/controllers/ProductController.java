@@ -27,24 +27,38 @@ public class ProductController {
 	private ProductService productService;
 
 	//  RequestMethod.GET is the default. It is optional
+	//	This method is a handler for the /products request.
+	//		get a list of all Products and add it to the model.
+	//		request the products page and the thymeleaf framework will take care of adding these rows to the page
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public String list(Model model){
 		model.addAttribute("products", productService.listAllProducts());
 		return "products";
 	}
 
+	/*
+	 *		this method will handle requests for /product/ followed by an id of the product we want to view
+	 */
 	@RequestMapping("product/{id}")
 	public String show(@PathVariable Integer id, Model model){
-		//@RequestParam String thing,
+						//@RequestParam String something  - if there URL has request params ?someting=name
+		//	check for a product that matches this id
 		if ( productService.getProductById(id) != null ) {
+			//	looks like we found it
+			//	take that product and pass it in the model to the web page
 			model.addAttribute("product", productService.getProductById(id));
 			return "productshow";
 		}
 		else {
+			//	looks like we did NOT find the product.
+			//	show the 404 page
 			return "404";
 		}
 	}
 
+	/*
+	 * 		this method
+	 */
 	@RequestMapping("product/edit/{id}")
 	public String edit(@PathVariable Integer id, Model model){
 		model.addAttribute("product", productService.getProductById(id));
