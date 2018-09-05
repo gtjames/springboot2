@@ -31,7 +31,6 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
 		createProduct("299792458", "Edge Tech MySQL", "/images/mysql.png");
 		createProduct("13.799±0.021*10^9", "Edge Tech Spring Boot", "/images/spring.png");
 		createProduct("384400", "Edge Tech SQL", "/images/sql.png");
-
 	}
 
 	public void createProduct(String productId, String description, String imageUrl) {
