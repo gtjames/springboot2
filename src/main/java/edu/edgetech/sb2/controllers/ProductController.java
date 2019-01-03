@@ -41,8 +41,7 @@ public class ProductController {
 	 */
 	@RequestMapping("product/{id}")
 	public String show(@PathVariable Integer id, Model model){
-						//@RequestParam String something  - if there URL has request params ?someting=name
-		//	check for a product that matches this id
+		//@RequestParam String something  - if there URL has request params ?something=name
 		if ( productService.getProductById(id) != null ) {
 			//	looks like we found it
 			//	take that product and pass it in the model to the web page
@@ -54,10 +53,12 @@ public class ProductController {
 			//	show the 404 page
 			return "404";
 		}
+		//	check for a product that matches this id
 	}
 
 	/*
-	 * 		this method
+	 * 		this method takes one parameter - product id
+	 * 		shows the edit page
 	 */
 	@RequestMapping("product/edit/{id}")
 	public String edit(@PathVariable Integer id, Model model){
@@ -102,5 +103,4 @@ public class ProductController {
 		model.addAttribute("products", productService.findByType(type));
 		return "products";
 	}
-
 }

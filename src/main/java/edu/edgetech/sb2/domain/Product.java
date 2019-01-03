@@ -40,6 +40,10 @@ public class Product {
     public Product() {
     }
 
+	public String getType() {
+		return type;
+	}
+
 	public void setType(String type) {
 		this.type = (int)(Math.random()*4)+"";
 	}
