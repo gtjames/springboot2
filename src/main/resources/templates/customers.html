@@ -7,6 +7,8 @@
 <body>
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <a href='/customer/new'>New Customer</a>
+
     <form class="form-horizontal" th:action="@{/customer/search}" method="post">
         <div class="form-group">
             <label class="col-sm-1 control-label">Phone #:</label>
