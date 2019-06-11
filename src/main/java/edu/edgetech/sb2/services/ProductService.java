@@ -1,6 +1,6 @@
 package edu.edgetech.sb2.services;
 
-import edu.edgetech.sb2.domain.Product;
+import edu.edgetech.sb2.models.Product;
 import edu.edgetech.sb2.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,8 +42,8 @@ public class ProductService {
 		return product;
 	}
 
-	public Iterable<Product> findByType(String type) {
-		return productRepository.findByType(type);
+	public Iterable<Product> findByCategory(String category) {
+		return productRepository.findByCategory(category);
 	}
 
 	public Iterable<Product> listOddProducts() {

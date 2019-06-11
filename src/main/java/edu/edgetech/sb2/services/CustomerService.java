@@ -1,6 +1,6 @@
 package edu.edgetech.sb2.services;
 
-import edu.edgetech.sb2.domain.Customer;
+import edu.edgetech.sb2.models.Customer;
 import edu.edgetech.sb2.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,8 +32,8 @@ public class CustomerService {
 		oCustomer.ifPresent(customer -> customerRepository.delete(customer));
 	}
 
-	public Iterable<Customer> findByPhoneNum(String type) {
-		return customerRepository.findByPhoneNum(type);
+	public Iterable<Customer> findByPhoneNum(String phoneNum) {
+		return customerRepository.findByPhoneNum(phoneNum);
 	}
 
 }

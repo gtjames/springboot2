@@ -3,17 +3,19 @@
 <head lang="en">
 
     <title>Edge Tech Java Spring Boot Framework</title>
+
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
 <body>
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
     <a href='/product/new'>New Product</a>
     <form class="form-horizontal" th:action="@{/product/search}" method="post">
         <div class="form-group">
-            <label class="col-sm-1 control-label">Type #:</label>
+            <label class="col-sm-1 control-label">Category:</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" name="type"/>
+                <input type="text" class="form-control" name="category"/>
             </div>
             <div class="col-sm-2">
                 <button type="submit" class="btn btn-default">Submit</button>
@@ -29,7 +31,7 @@
                 <th>Description</th>
                 <th>Price</th>
                 <th>Image</th>
-                <th>Type</th>
+                <th>Category</th>
                 <th>View</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -40,7 +42,7 @@
                 <td th:text="${product.description}">description</td>
                 <td th:text="${product.price}">price</td>
                 <td><img th:src="${product.imageUrl}" width="35" height="40"/></td>
-                <td th:text="${product.type}">type</td>
+                <td th:text="${product.category}">category</td>
                 <!--	These items have been added for the new functionality-->
                 <!--		to make our app a richer MVC example-->
                 <td><a th:href="${ '/product/'        + product.id}">View</a></td>

@@ -1,6 +1,6 @@
 package edu.edgetech.sb2.controllers;
 
-import edu.edgetech.sb2.domain.Customer;
+import edu.edgetech.sb2.models.Customer;
 import edu.edgetech.sb2.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,18 +11,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/customer")
 public class CustomerController {
+
 	@Autowired
 	private CustomerService customerService;
 
 	//  RequestMethod.GET is the default. It is optional
-	@RequestMapping(value = "/customers", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model){
 		model.addAttribute("customers", customerService.listAllCustomers());
 		return "customers";
 	}
 
-	@RequestMapping("customer/{id}")
+	@RequestMapping("/{id}")
 	public String show(@PathVariable Integer id, Model model){
 		//@RequestParam String thing,
 		Customer cust = customerService.getCustomerById(id);
@@ -36,31 +38,42 @@ public class CustomerController {
 		}
 	}
 
-	@RequestMapping("customer/edit/{id}")
+	@RequestMapping("/edit/{id}")
 	public String edit(@PathVariable Integer id, Model model){
 		model.addAttribute("customer", customerService.getCustomerById(id));
 		return "customerform";
 	}
 
-	@RequestMapping("customer/new")
+	@RequestMapping("/tree/{levels}")
+	public String tree(@PathVariable Integer levels, Model model){
+		String row = new String(new char[levels-1]).replace("\0", " ") +
+					 new String(new char[levels*2-1]).replace("\0", "*");
+		for ( int i = 1; i <= levels; i++ ) {
+			System.out.println(row.substring(i-1, levels-1+2*i-1) );
+		}
+		model.addAttribute("customers", customerService.listAllCustomers());
+		return "customers";
+	}
+
+	@RequestMapping("/new")
 	public String newCustomer(Model model){
 		model.addAttribute("customer", new Customer());
 		return "customerform";
 	}
 
-	@RequestMapping(value = "customer", method = RequestMethod.POST)
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String save(Customer customer){
 		customerService.saveCustomer(customer);
-		return "redirect:/customer/" + customer.getId();
+		return "redirect:/customer/list" + customer.getId();
 	}
 
-	@RequestMapping("customer/delete/{id}")
+	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable Integer id){
 		customerService.deleteCustomer(id);
-		return "redirect:/customers";
+		return "redirect:/customer/list";
 	}
 
-	@RequestMapping(value = "customer/search", method = RequestMethod.POST)
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String search(@RequestParam String phoneNum, Model model){
 		model.addAttribute("customers", customerService.findByPhoneNum(phoneNum));
 		return "customers";

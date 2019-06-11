@@ -1,6 +1,6 @@
 package edu.edgetech.sb2.repositories;
 
-import edu.edgetech.sb2.domain.Product;
+import edu.edgetech.sb2.models.Product;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -10,5 +10,5 @@ import java.util.List;
  */
 
 public interface ProductRepository extends CrudRepository<Product, Integer> {
-    List<Product> findByType(String type);
+    List<Product> findByCategory(String category);
 }

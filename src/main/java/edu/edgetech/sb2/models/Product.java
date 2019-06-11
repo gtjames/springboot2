@@ -1,4 +1,4 @@
-package edu.edgetech.sb2.domain;
+package edu.edgetech.sb2.models;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -17,7 +17,7 @@ public class Product {
     private String description;
     private String imageUrl;
     private BigDecimal price;
-    private String  type;
+    private String category;
 
 	@Override
 	public String toString() {
@@ -25,7 +25,7 @@ public class Product {
 				"id=" + id +
 				", productId='" + productId + '\'' +
 				", description='" + description + '\'' +
-				", type='" + type + '\'' +
+				", category='" + category + '\'' +
 				'}';
 	}
 
@@ -34,18 +34,18 @@ public class Product {
         this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
-        this.type = (int)(Math.random()*4)+"";
+        this.category = (int)(Math.random()*4)+"";
     }
 
     public Product() {
     }
 
-	public String getType() {
-		return type;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setType(String type) {
-		this.type = (int)(Math.random()*4)+"";
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public String getDescription() {

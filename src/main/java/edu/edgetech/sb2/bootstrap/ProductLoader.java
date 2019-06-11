@@ -1,6 +1,6 @@
 package edu.edgetech.sb2.bootstrap;
 
-import edu.edgetech.sb2.domain.Product;
+import edu.edgetech.sb2.models.Product;
 import edu.edgetech.sb2.services.ProductService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,16 +27,16 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
 		//	see down below we have a small method to create Products for us
-		createProduct("112358132134", 		"Edge Tech Agile", 			"/images/agile.png");
-		createProduct("6.022140857×10^23", 	"Edge Tech C#", 			"/images/csharp.png");
-		createProduct("8.314459848", 		"Edge Tech CSS", 			"/images/css.png");
-		createProduct("1.6021766×10^−19", 	"Edge Tech HTML5", 			"/images/html.png");
-		createProduct("137.036", 			"Edge Tech Java 10", 		"/images/java.png");
-		createProduct("9.46073047 x 10^12", "Edge Tech JavaScript", 	"/images/javascript.png");
-		createProduct("2.718281828459045", 	"Edge Tech MongoDB", 		"/images/mongodb.png");
-		createProduct("299792458", 			"Edge Tech MySQL", 			"/images/mysql.png");
-		createProduct("13.799±0.021*10^9", 	"Edge Tech Spring Boot", 	"/images/spring.png");
-		createProduct("384400", 			"Edge Tech SQL", 			"/images/sql.png");
+		createProduct("112358132134", 		"Edge Tech Agile", 			"agile.png");
+		createProduct("6.022140857×10^23", 	"Edge Tech C#", 			"csharp.png");
+		createProduct("8.314459848", 		"Edge Tech CSS", 			"css.png");
+		createProduct("1.6021766×10^−19", 	"Edge Tech HTML5", 			"html.png");
+		createProduct("137.036", 			"Edge Tech Java 10", 		"java.png");
+		createProduct("9.46073047 x 10^12", "Edge Tech JavaScript", 	"javascript.png");
+		createProduct("2.718281828459045", 	"Edge Tech MongoDB", 		"mongodb.png");
+		createProduct("299792458", 			"Edge Tech MySQL", 			"mysql.png");
+		createProduct("13.799±0.021*10^9", 	"Edge Tech Spring Boot", 	"spring.png");
+		createProduct("384400", 			"Edge Tech SQL", 			"sql.png");
 	}
 
 	/*
@@ -49,8 +49,8 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
 	public void createProduct(String productId, String description, String imageUrl) {
 		Product product;
 
-		product = new Product(productId, description, imageUrl, new BigDecimal(Math.random() * 50));
-		productService.add(product);
+		product = new Product(productId, description, "/images/" + imageUrl, new BigDecimal(Math.random() * 50));
+	//	productService.add(product);		//	turned off for now to not keep creating Product records
 		log.info(product);
 	}
 }

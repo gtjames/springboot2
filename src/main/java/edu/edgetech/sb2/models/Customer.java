@@ -1,4 +1,4 @@
-package edu.edgetech.sb2.domain;
+package edu.edgetech.sb2.models;
 
 import javax.persistence.*;
 

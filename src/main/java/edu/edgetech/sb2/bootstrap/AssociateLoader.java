@@ -1,17 +1,13 @@
 package edu.edgetech.sb2.bootstrap;
 
-import edu.edgetech.sb2.domain.Customer;
-import edu.edgetech.sb2.domain.Product;
+import edu.edgetech.sb2.models.Customer;
 import edu.edgetech.sb2.services.CustomerService;
-import edu.edgetech.sb2.services.ProductService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
 
 @Component
 public class AssociateLoader implements ApplicationListener<ContextRefreshedEvent> {
@@ -34,7 +30,7 @@ public class AssociateLoader implements ApplicationListener<ContextRefreshedEven
 		Customer customer;
 
 		customer = new Customer(name, address, phoneNum);
-		customerService.saveCustomer(customer);
+	//	customerService.saveCustomer(customer);			//	turned off for now to not keep creating Customer records
 		log.info(customer);
 	}
 }
