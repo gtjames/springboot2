@@ -119,7 +119,7 @@ public class ProductController {
 				e.printStackTrace();
 			}
 		}
-		return subfolder + "/" + fileName;
+		return "/" + subfolder + "/" + fileName;
 	}
 
 	@RequestMapping("/delete/{id}")
