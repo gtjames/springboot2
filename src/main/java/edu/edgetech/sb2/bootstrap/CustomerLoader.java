@@ -10,7 +10,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AssociateLoader implements ApplicationListener<ContextRefreshedEvent> {
+public class CustomerLoader implements ApplicationListener<ContextRefreshedEvent> {
 	@Autowired
 	private CustomerService customerService;
 
@@ -23,14 +23,14 @@ public class AssociateLoader implements ApplicationListener<ContextRefreshedEven
 		createCustomer("First Command", 	"1 First Command Rd", 		"682-334-5679");
 		createCustomer("Ancora Education", 	"8701 Bedford-Euless Rd", 	"682-334-5679");
 		createCustomer("American Airlines", "1 First Command Rd", 		"682-334-5679");
-		createCustomer("Homebid.com", 		"Scotntsdale AZ", 			"801-225-2030");
+		createCustomer("Homebid.com", 		"Scottsdale AZ", 			"801-225-2030");
 	}
 
 	public void createCustomer(String name, String address, String phoneNum ) {
 		Customer customer;
 
 		customer = new Customer(name, address, phoneNum);
-	//	customerService.saveCustomer(customer);			//	turned off for now to not keep creating Customer records
+		customerService.saveCustomer(customer);			//	turned off for now to not keep creating Customer records
 		log.info(customer);
 	}
 }

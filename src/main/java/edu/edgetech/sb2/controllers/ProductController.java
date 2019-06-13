@@ -145,9 +145,10 @@ public class ProductController {
         String uploadFolder = environment.getProperty("eta.uploadFolder");
 
         //	load the file and give us back the location of the image to include that in our Proudct record in the database
-		String fileName = uploadFile(file, uploadFolder, "images");	// update song path
-		product.setImageUrl(fileName);
-
+		if (! file.isEmpty()) {
+			String fileName = uploadFile(file, uploadFolder, "images");    // update song path
+			product.setImageUrl(fileName);
+		}
 		productService.saveProduct(product);			//	save to the database (create the record if it does not exist
 		return "redirect:/product/list";				//	return "redirect:/product/show/" + product.getId();		to return to the Details page
 	}
@@ -161,17 +162,15 @@ public class ProductController {
 	 */
 	public static String uploadFile(MultipartFile file, String uploadFolder, String subfolder) {
 		String fileName = null;
-		if (! file.isEmpty()) {
-			try {
-				// Get the file and save it somewhere
-				byte[] bytes = file.getBytes();
-				fileName = file.getOriginalFilename();
-				Path path = Paths.get(".");
-				path = Paths.get(path.toAbsolutePath() + uploadFolder + subfolder + "/" + fileName);
-				Files.write(path, bytes);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		try {
+			// Get the file and save it somewhere
+			byte[] bytes = file.getBytes();
+			fileName = file.getOriginalFilename();
+			Path path = Paths.get(".");
+			path = Paths.get(path.toAbsolutePath() + uploadFolder + subfolder + "/" + fileName);
+			Files.write(path, bytes);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return "/" + subfolder + "/" + fileName;
 	}

@@ -1,27 +1,47 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head lang="en">
-
     <title>Edge Tech Java Spring Boot Framework</title>
-
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
 <body>
-<div align="center" th:if="${param.error}">
-    <h3 >@ViewData["Message"]</h3>
 
-    <address>
-        Edge Tech Academy<br />
-        8701 Beford Euless Rd<br />
-        Suite #610<br />
-        Hurst, TX 76053<br />
-        <abbr title="Phone">P:</abbr>
-        682-334-5679
-    </address>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+                <ul class="nav navbar-nav">
+                    <li><a href="#" th:href="@{/product/list}">Products</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="#" th:href="@{/customer/list}">Customers</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="jumbotron">
+        <div class="row text-center">
+            <h3 >Java Seed Project</h3>
+            <div class="row text-center">
+                <img src="../../static/images/EdgeTech.png" width="188" th:src="@{/images/EdgeTech.png}"/>
+            </div>
 
-    <address>
-        <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
+            <address>
+                Edge Tech Academy<br />
+                8701 Beford Euless Rd<br />
+                Suite #610<br />
+                Hurst, TX 76053<br />
+                <abbr title="Phone">P:</abbr>
+                682-334-5679
+            </address>
+
+            <address>
+                <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
+                <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+            </address>
+        </div>
+    </div>
+</div>
 </body>
 </html>

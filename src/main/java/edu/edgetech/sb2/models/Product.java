@@ -6,8 +6,9 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "product")
 public class Product {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Version
@@ -24,12 +25,13 @@ public class Product {
 		return "Product{" +
 				"id=" + id +
 				", productId='" + productId + '\'' +
-				", description='" + description + '\'' +
+                ", description='" + description + '\'' +
+                ", price='" + price + '\'' +
 				", category='" + category + '\'' +
 				'}';
 	}
 
-	public Product(String productId, String description, String imageUrl, BigDecimal price ) {
+	public Product(String productId, String description, String imageUrl, BigDecimal price) {
         this.productId = productId;
         this.description = description;
         this.imageUrl = imageUrl;

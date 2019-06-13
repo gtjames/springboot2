@@ -51,10 +51,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/contact").permitAll()
                 .antMatchers("/register").permitAll()
 				.antMatchers("/product/**").permitAll()
-				.antMatchers("/customer/new/**").hasAnyAuthority("SUPER_USER", "ADMIN_USER")
+
 				.antMatchers("/customer/edit/**").hasAnyAuthority("SUPER_USER", "ADMIN_USER")
 				.antMatchers("/admin/**").hasAnyAuthority("SUPER_USER","ADMIN_USER")
+				.antMatchers("/customer/new/**").hasAnyAuthority("SUPER_USER", "ADMIN_USER")
+
 				.anyRequest().authenticated()
+
 				.and()
 				// form login
 				.csrf().disable().formLogin()
@@ -63,11 +66,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.successHandler(successHandler)
 				.usernameParameter("email")
 				.passwordParameter("password")
+
 				.and()
 				// logout
 				.logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/contact").and()
+				.logoutSuccessUrl("/").and()
 				.exceptionHandling()
 				.accessDeniedPage("/access-denied");
 	}

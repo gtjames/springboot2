@@ -31,9 +31,10 @@ public class AuthenticationController {
 
     @RequestMapping(value = { "/login" }, method = RequestMethod.GET)
     public ModelAndView login() {
+        System.out.println("Login:   Of all the gin joints");
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("email", "");
-        modelAndView.addObject("password", "");
+//        modelAndView.addObject("email", "");
+//        modelAndView.addObject("password", "");
         modelAndView.setViewName("login"); // resources/template/login.html
         return modelAndView;
     }
@@ -91,9 +92,9 @@ public class AuthenticationController {
         }
 
         modelAndView.addObject("user", new User());
-        modelAndView.addObject("email", user.getEmail());
-        modelAndView.addObject("password", "");
-        modelAndView.setViewName("contact");
+//        modelAndView.addObject("email", user.getEmail());
+//        modelAndView.addObject("password", "");
+        modelAndView.setViewName("register");       //  contact
         return modelAndView;
     }
 }

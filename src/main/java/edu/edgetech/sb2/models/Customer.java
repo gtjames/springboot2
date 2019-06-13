@@ -5,8 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "customer")
 public class Customer {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Version

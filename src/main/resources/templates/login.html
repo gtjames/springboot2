@@ -16,9 +16,10 @@
 			<form th:action="@{/login}" method="POST" class="form-signin">
 				<h3 class="form-signin-heading" th:text="Login"></h3>
 				<br />
-				<input type="text" id="email" name="email" th:placeholder="Email" class="form-control" th:field="${email}"/>
+<!--				th:field="${email}"			th:field="${password}"		-->
+				<input type="text" id="email" name="email" th:placeholder="Email" class="form-control" />
 				<br />
-				<input type="password" id="password" name="password" th:placeholder="Password" class="form-control" th:field="${password}"/>
+				<input type="password" th:placeholder="Password" id="password" name="password" class="form-control" />
 				<br />
 
 				<div align="center" th:if="${param.error}">
