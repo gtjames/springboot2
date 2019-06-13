@@ -1,4 +1,4 @@
-package edu.edgetech.sb2;
+package edu.edgetech.sb2.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
@@ -45,7 +45,7 @@ public class CustomLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 			url = "/customer/list";
 		} 
 		else if (roles.contains("SITE_USER")) {
-			url = "/product/list";
+			url = "/";
 		}
 		return url;
 	}

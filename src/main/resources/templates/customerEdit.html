@@ -12,7 +12,7 @@
 
     <h2>Customer Details</h2>
     <div>
-        <form class="form-horizontal" th:object="${customer}" th:action="@{/customer}" method="post">
+        <form class="form-horizontal" th:object="${customer}" th:action="@{/customer/save}" method="post">
             <input type="hidden" th:field="*{id}"/>
             <input type="hidden" th:field="*{version}"/>
             <div class="form-group">

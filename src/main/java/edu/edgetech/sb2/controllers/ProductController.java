@@ -88,13 +88,13 @@ public class ProductController {
 	 *		this method will handle requests for /product/ followed by an id of the product we want to view
 	 */
 	@RequestMapping("/{id}")
-	public String show(@PathVariable Integer id, Model model){
+	public String read(@PathVariable Integer id, Model model){
 		//@RequestParam String something  - if there URL has request params ?something=name
 		if ( productService.getProductById(id) != null ) {
 			//	looks like we found it
 			//	take that product and pass it in the model to the web page
 			model.addAttribute("product", productService.getProductById(id));
-			return "productshow";
+			return "productDetails";
 		}
 		else {
 			//	looks like we did NOT find the product.
@@ -111,7 +111,7 @@ public class ProductController {
 	 * 		ti the thymeleaf view engine to merge it with the HTML to show our page with the data.
 	 */
 	@RequestMapping("/edit/{id}")
-	public String edit(@PathVariable Integer id, Model model){
+	public String update(@PathVariable Integer id, Model model){
 		model.addAttribute("product", productService.getProductById(id));
 		return "productEdit";
 	}

@@ -1,4 +1,4 @@
-package edu.edgetech.sb2;
+package edu.edgetech.sb2.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

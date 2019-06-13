@@ -32,28 +32,31 @@ public class AuthenticationController {
     @RequestMapping(value = { "/login" }, method = RequestMethod.GET)
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("email", "");
+        modelAndView.addObject("password", "");
         modelAndView.setViewName("login"); // resources/template/login.html
         return modelAndView;
     }
 
-    @RequestMapping(value = { "/name" })
-    public String name(Model model) {
-        model.addAttribute("myName", "Gary James");
-        return "login";
-    }
+//    @RequestMapping(value = { "/x/gtj" })
+//    public String name(Model model) {
+//        model.addAttribute("email", "gtjames@gmail.com");
+//        model.addAttribute("password", "password");
+//        return "login";
+//    }
+//
+//    @RequestMapping(value = { "/x/super" })
+//    public String superUser(Model model) {
+//        model.addAttribute("email", "admin@gmail.com");
+//        model.addAttribute("password", "abc123ABC");
+//        return "login";
+//    }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(Model model) {
         User user = new User();
         model.addAttribute("user", user);
         return "register";				// resources/template/register.html
-    }
-
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public ModelAndView home() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("home"); // resources/template/home.html
-        return modelAndView;
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -88,7 +91,9 @@ public class AuthenticationController {
         }
 
         modelAndView.addObject("user", new User());
-        modelAndView.setViewName("register");
+        modelAndView.addObject("email", user.getEmail());
+        modelAndView.addObject("password", "");
+        modelAndView.setViewName("contact");
         return modelAndView;
     }
 }

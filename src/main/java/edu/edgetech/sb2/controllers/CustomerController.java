@@ -25,12 +25,12 @@ public class CustomerController {
 	}
 
 	@RequestMapping("/{id}")
-	public String show(@PathVariable Integer id, Model model){
+	public String read(@PathVariable Integer id, Model model){
 		//@RequestParam String thing,
 		Customer cust = customerService.getCustomerById(id);
 		if ( cust != null ) {
 			model.addAttribute("customer", cust);
-			return "customershow";
+			return "customerDetails";
 		}
 		else {
 			model.addAttribute("message", "The Customer Id: " + id + " was not found in the database");
@@ -39,32 +39,21 @@ public class CustomerController {
 	}
 
 	@RequestMapping("/edit/{id}")
-	public String edit(@PathVariable Integer id, Model model){
+	public String update(@PathVariable Integer id, Model model){
 		model.addAttribute("customer", customerService.getCustomerById(id));
-		return "customerform";
-	}
-
-	@RequestMapping("/tree/{levels}")
-	public String tree(@PathVariable Integer levels, Model model){
-		String row = new String(new char[levels-1]).replace("\0", " ") +
-					 new String(new char[levels*2-1]).replace("\0", "*");
-		for ( int i = 1; i <= levels; i++ ) {
-			System.out.println(row.substring(i-1, levels-1+2*i-1) );
-		}
-		model.addAttribute("customers", customerService.listAllCustomers());
-		return "customers";
+		return "customerEdit";
 	}
 
 	@RequestMapping("/new")
 	public String newCustomer(Model model){
 		model.addAttribute("customer", new Customer());
-		return "customerform";
+		return "customerEdit";
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(Customer customer){
 		customerService.saveCustomer(customer);
-		return "redirect:/customer/list" + customer.getId();
+		return "redirect:/customer/list";
 	}
 
 	@RequestMapping("/delete/{id}")
@@ -76,6 +65,17 @@ public class CustomerController {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String search(@RequestParam String phoneNum, Model model){
 		model.addAttribute("customers", customerService.findByPhoneNum(phoneNum));
+		return "customers";
+	}
+
+	@RequestMapping("/tree/{levels}")
+	public String tree(@PathVariable Integer levels, Model model){
+		String row = new String(new char[levels-1]).replace("\0", " ") +
+	                 new String(new char[levels*2-1]).replace("\0", "*");
+		for ( int i = 1; i <= levels; i++ ) {
+			System.out.println(row.substring(i-1, levels-1+2*i-1) );
+		}
+		model.addAttribute("customers", customerService.listAllCustomers());
 		return "customers";
 	}
 }
