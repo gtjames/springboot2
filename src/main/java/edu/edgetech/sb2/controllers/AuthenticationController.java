@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,29 +28,24 @@ public class AuthenticationController {
     @Autowired
     NotificationService notificationService;
 
+    /**
+     *      TODO    ModelAndView
+     *              This is different than what we have done in other controllers
+     *              In the others we just have a return type of String
+     *              Here we use ModelAndView
+     *              Fear not they are doing exactly ths save things
+     *              The ModelAndView object is VERY similar to the Model object with a small addition
+     *                  it has a setViewName method to save the view that thymeleaf will use to display the page
+     *                  adding attributes is the same otherwise addAttribute!
+     *                  then the method returns the ModelAndView object
+     */
     @RequestMapping(value = { "/login" }, method = RequestMethod.GET)
     public ModelAndView login() {
         System.out.println("Login:   Of all the gin joints");
         ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("email", "");
-//        modelAndView.addObject("password", "");
         modelAndView.setViewName("login"); // resources/template/login.html
         return modelAndView;
     }
-
-//    @RequestMapping(value = { "/x/gtj" })
-//    public String name(Model model) {
-//        model.addAttribute("email", "gtjames@gmail.com");
-//        model.addAttribute("password", "password");
-//        return "login";
-//    }
-//
-//    @RequestMapping(value = { "/x/super" })
-//    public String superUser(Model model) {
-//        model.addAttribute("email", "admin@gmail.com");
-//        model.addAttribute("password", "abc123ABC");
-//        return "login";
-//    }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(Model model) {
@@ -92,8 +86,6 @@ public class AuthenticationController {
         }
 
         modelAndView.addObject("user", new User());
-//        modelAndView.addObject("email", user.getEmail());
-//        modelAndView.addObject("password", "");
         modelAndView.setViewName("register");       //  contact
         return modelAndView;
     }

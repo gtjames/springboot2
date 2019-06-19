@@ -20,18 +20,20 @@ public class Product {
     private BigDecimal price;
     private String category;
 
-	@Override
-	public String toString() {
-		return "Product{" +
-				"id=" + id +
-				", productId='" + productId + '\'' +
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", version=" + version +
+                ", productId='" + productId + '\'' +
                 ", description='" + description + '\'' +
-                ", price='" + price + '\'' +
-				", category='" + category + '\'' +
-				'}';
-	}
+                ", imageUrl='" + imageUrl + '\'' +
+                ", price=" + price +
+                ", category='" + category + '\'' +
+                '}';
+    }
 
-	public Product(String productId, String description, String imageUrl, BigDecimal price) {
+    public Product(String productId, String description, String imageUrl, BigDecimal price) {
         this.productId = productId;
         this.description = description;
         this.imageUrl = imageUrl;

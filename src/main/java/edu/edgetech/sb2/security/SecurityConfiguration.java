@@ -41,6 +41,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.passwordEncoder(bCryptPasswordEncoder);
 	}
 
+	/**
+	 * 	TODO	I would love to document this all at this time but I am not ready to do that.
+	 * 			you can figure out much of it on your own with APIs like permitAll amd hasAnyAuthority
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 

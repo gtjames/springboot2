@@ -1,3 +1,7 @@
+-- TODO This script is ready for you to create you tables for MS SQL Server
+--  if the database does not yet exist you will need to add
+--  create database edgetech to the script as well
+
 USE edgetech;
 
 DROP TABLE auth_user_role;

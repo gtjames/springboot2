@@ -10,13 +10,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class NotificationService {
 
+    //  TODO Spring will inject this class into our code to enable emailing
+    @Autowired
     private JavaMailSender javaMailSender;
 
-    @Autowired
-    public NotificationService(JavaMailSender javaMailSender) {
-        this.javaMailSender = javaMailSender;
-    }
-
+    /**
+     * TODO so you want to send an email using code
+     *  here are a few URLs to help you do that
+     *      To get an app password for your mail account
+     *      https://support.google.com/accounts/answer/185833
+     *  https://www.baeldung.com/spring-email
+     *
+     *  modify the code to create other methods in which you pass along the recipient, subject and body
+     */
     public void sendNotification(User user) throws MailException {
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(user.getEmail());

@@ -12,7 +12,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Created by Edge Tech Academy on 12/12/2016.
+ * 		TODO	ProductService
+ * 				These are the APIs we expose to the Controllers
+ * 				We pretty much have all of them enable. Frequently you would change how the delete code works
+ * 				probably by setting an 'active' attribute to false and saving the record and NOT deleting anything
  */
 @Service
 public class ProductService {

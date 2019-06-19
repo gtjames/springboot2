@@ -27,16 +27,16 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
 		//	see down below we have a small method to create Products for us
-		createProduct("112358132134", 		"Edge Tech Agile", 			"agile.png");
-		createProduct("6.022140857×10^23", 	"Edge Tech C#", 			"csharp.png");
-		createProduct("8.314459848", 		"Edge Tech CSS", 			"css.png");
-		createProduct("1.6021766×10^−19", 	"Edge Tech HTML5", 			"html.png");
-		createProduct("137.036", 			"Edge Tech Java 10", 		"java.png");
-		createProduct("9.46073047 x 10^12", "Edge Tech JavaScript", 	"javascript.png");
-		createProduct("2.718281828459045", 	"Edge Tech MongoDB", 		"mongodb.png");
-		createProduct("299792458", 			"Edge Tech MySQL", 			"mysql.png");
-		createProduct("13.799±0.021*10^9", 	"Edge Tech Spring Boot", 	"spring.png");
-		createProduct("384400", 			"Edge Tech SQL", 			"sql.png");
+		createProduct("123", 				"Edge Tech Agile", 			"agile.png");
+		createProduct("186282", 			"Edge Tech C#", 			"csharp.png");
+		createProduct("color:blue",	 		"Edge Tech CSS", 			"css.png");
+		createProduct("<HTML>",			 	"Edge Tech HTML5", 			"html.png");
+		createProduct("Version 12", 		"Edge Tech Java",	 		"java.png");
+		createProduct("Must know!",			"Edge Tech JavaScript", 	"javascript.png");
+		createProduct("No SQL",			 	"Edge Tech MongoDB", 		"mongodb.png");
+		createProduct("CREATE Database X",	"Edge Tech MySQL", 			"mysql.png");
+		createProduct("@Cool",			 	"Edge Tech Spring Boot", 	"spring.png");
+		createProduct("SELECT * FROM",		"Edge Tech SQL", 			"sql.png");
 	}
 
 	/*
@@ -49,6 +49,8 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
 	public void createProduct(String productId, String description, String imageUrl) {
 		Product product;
 
+		//	TODO 	this is only needed if you are creating and dropping the database with each run
+		//		otherwise you are adding records to your database over and over again
 		float price = (int)((Math.random() * 5000) + 2000);
 		price /= 100;
 		product = new Product(productId, description, "/images/" + imageUrl, new BigDecimal(price));

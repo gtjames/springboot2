@@ -67,15 +67,4 @@ public class CustomerController {
 		model.addAttribute("customers", customerService.findByPhoneNum(phoneNum));
 		return "customers";
 	}
-
-	@RequestMapping("/tree/{levels}")
-	public String tree(@PathVariable Integer levels, Model model){
-		String row = new String(new char[levels-1]).replace("\0", " ") +
-	                 new String(new char[levels*2-1]).replace("\0", "*");
-		for ( int i = 1; i <= levels; i++ ) {
-			System.out.println(row.substring(i-1, levels-1+2*i-1) );
-		}
-		model.addAttribute("customers", customerService.listAllCustomers());
-		return "customers";
-	}
 }
