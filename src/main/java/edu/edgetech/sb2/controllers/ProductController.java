@@ -279,7 +279,7 @@ public class ProductController {
 				list += line.charAt(i);
 			}
 		}
-		return "'" + line + "' has " + vowels + " vowels. They are " + list;
+		return "'" + line + "' has " + vowels + " vowels. Here are the remaining consonants " + list;
 	}
 
 	@RequestMapping(value="/json/{id}", method=GET)
