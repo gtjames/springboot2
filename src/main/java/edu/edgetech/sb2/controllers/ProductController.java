@@ -13,9 +13,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * 	ProductController
@@ -182,8 +179,6 @@ public class ProductController {
 	/**
 	 *		delete - delete this product from the database
 	 *					when complete redirect the user to the product /list page
-	 * @param id
-	 * @return
 	 */
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable Integer id){
@@ -193,7 +188,7 @@ public class ProductController {
 
 	//	These items have been added for the new functionality
 	//		to make our app a richer MVC example
-	@RequestMapping(value = "/oddProducts", method = GET)
+	@RequestMapping(value = "/oddProducts", method = RequestMethod.GET)
 	public String listOdd(Model model){
 		model.addAttribute("products", productService.listOddProducts());
 		return "products";
@@ -226,78 +221,15 @@ public class ProductController {
 	}
 
 	/**
-	 * 		TODO	The rest of these endpoints are for educational purposes
-	 * 				All of these endpoints are annotated with @ResponseBody. This means what ever we return
-	 * 				with the return statement is exactly and only what will be displayed in the browser.
-	 * 				This makes for some great experimentation	.
-	 * 	
-	 * 				/product/string/{any text we want} 
-	 * 					assigns the text following /product/string/{XXXXXX} to the line parameter
-	 * 					Then we can do whatever is required with that data
-	 * 					
-	 *				/product/query?id={some text}&string={some other text}&number={an optional NUMBER}
-	 *					This endpoint has three possible parameters passed to it. 
-	 *					The first two are required and number is optional
-	 *				
-	 *				/products/vowels/{some text}
-	 *					we are going to count the vowels in the string passed into the endpoint
-	 *					along the way we will also save the consonants that are obviously not vowels
-	 *				
-	 *				/products/json/{product id}
-	 *					read the Product table and retrieve a record
-	 *					return that to the web page. Because it is marked as ResponseBody it will get bundled up
-	 *					like a JSON object and sent to the page
+	 *		/products/json/{product id}
+	 *			read the Product table and retrieve a record
+	 *			return that to the web page. Because it is marked as ResponseBody it will get bundled up
+	 *			like a JSON object and sent to the page
 	 *
-	 *				/products/tree/{how many limbs}
-	 *					let's practice for that job interview question
-	 * 
 	 */
-	@RequestMapping(value = "/string/{line}")
-	@ResponseBody
-	public String result(@PathVariable String line) {
-		return line;
-	}
-
-	@RequestMapping(value = "/query")
-	@ResponseBody
-	public String query(@RequestParam String id,							//	'id' param is required
-						@RequestParam("string") String input,				//	'string' param is required. the variable used is input
-						@RequestParam("number") Optional<Integer> number) {	//	'itemid' param is optional
-		return "These are the Query params. id: " + id + " string: " + input + " and number: " + (number.isPresent() ? number.get() : "not passed in");
-	}
-
-	@RequestMapping(value="/vowels/{line}", method=GET)
-	@ResponseBody
-	public String vowels(@PathVariable String line) {
-		int vowels = 0;
-		String list = "";
-		for (int i = 0; i < line.length(); i++) {
-			if ( "aeiou".contains(""+line.charAt(i))) {
-				vowels++;
-			}
-			else {
-				list += line.charAt(i);
-			}
-		}
-		return "'" + line + "' has " + vowels + " vowels. Here are the remaining consonants " + list;
-	}
-
-	@RequestMapping(value="/json/{id}", method=GET)
+	@RequestMapping(value="/json/{id}", method=RequestMethod.GET)
 	@ResponseBody
 	public Product json(@PathVariable Integer id){
-		Product prod = productService.getProductById(id);
-		return prod;
-	}
-
-	@RequestMapping("/tree/{levels}")
-	@ResponseBody
-	public String tree(@PathVariable Integer levels) {
-		String strTree = "";
-		String row = new String(new char[levels-1]).replace  ("\0", " ") +
-					 new String(new char[levels*2-1]).replace("\0", "*");
-		for ( int i = 1; i <= levels; i++ ) {
-			strTree += row.substring(i-1, levels-1+2*i-1) + "<br>";
-		}
-		return "<pre>" + strTree + "</pre>";
+		return productService.getProductById(id);
 	}
 }
