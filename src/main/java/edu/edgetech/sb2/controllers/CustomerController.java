@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/customer")
 public class CustomerController {
 
+	//	Use a service for when things get complicated.
+	//	more so than just doing a findAll or delete
 	@Autowired
 	private CustomerService customerService;
 
@@ -65,6 +67,13 @@ public class CustomerController {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String search(@RequestParam String phoneNum, Model model){
 		model.addAttribute("customers", customerService.findByPhoneNum(phoneNum));
+		return "customers";
+	}
+
+	@RequestMapping(value = "/oddCustomers", method = RequestMethod.GET)
+	public String listOdd(Model model){
+		model.addAttribute("customers", customerService.listOddCustomers());
+		System.out.println("Returning Customers:");
 		return "customers";
 	}
 }

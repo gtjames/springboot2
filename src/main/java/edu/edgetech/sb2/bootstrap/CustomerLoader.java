@@ -23,11 +23,12 @@ public class CustomerLoader implements ApplicationListener<ContextRefreshedEvent
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
 		//	add in as many dummy records as you would like
-		createCustomer("Edge Tech Academy", "4421 S Watson Rd",		 	"682-334-5679");
+		createCustomer("Edge Tech Academy", "2242 S Watson Rd",		 	"682-334-5679");
 		createCustomer("Apple Computers", 	"1 Infinite Loop Lane", 	"682-334-5679");
 		createCustomer("Ancora Education", 	"8701 Bedford-Euless Rd", 	"682-334-5679");
 		createCustomer("American Airlines", "1 American Airlines Rd",	"682-334-5679");
 		createCustomer("My New Career", 	"Washington D.C.", 			"801-225-2030");
+
 	}
 
 	public void createCustomer(String name, String address, String phoneNum ) {
@@ -36,7 +37,7 @@ public class CustomerLoader implements ApplicationListener<ContextRefreshedEvent
 		//	TODO 	this is only needed if you are creating and dropping the database with each run
 		//		otherwise you are adding records to your database over and over again
 		customer = new Customer(name, address, phoneNum);
-		customerService.saveCustomer(customer);			//	turned off for now to not keep creating Customer records
+		customerService.saveCustomer(customer);			//	turn off to stop creating Customer records with each run
 		log.info(customer);
 	}
 }

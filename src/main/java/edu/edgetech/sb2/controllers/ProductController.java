@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * 	ProductController
@@ -40,7 +41,14 @@ public class ProductController {
 	 * 			add others and disable others (We rarely delete database records any more). So the service class only opens
 	 * 			up the data access methods we want our programs to use.
 	 */
-	@Autowired
+	//	Use a service for when things get complicated more than just doing a findAll or delete.
+	//	We could go directly to the Entity Repository object (ProductReposity). It is after all a CrudRepository.
+	//	So it is very knowledgeable about accessing a database entity.
+	// 	But we have a better separation of concerns
+	//	when we split the DB request servicing functions to a separate 'Service' class
+	@Autowired		//	@Autowired will request SpringBoot to find the ProductService class and instantiate one for us
+	//	and assign (INJECT) the class property with the value. This is Dependency Injection.
+	//	our class depends on this service
 	private ProductService productService;
 
 	/**

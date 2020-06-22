@@ -27,16 +27,16 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
 		//	see down below we have a small method to create Products for us
-		createProduct("123", 				"Edge Tech Agile", 			"agile.png");
-		createProduct("186282", 			"Edge Tech C#", 			"csharp.png");
-		createProduct("color:blue",	 		"Edge Tech CSS", 			"css.png");
-		createProduct("<HTML>",			 	"Edge Tech HTML5", 			"html.png");
-		createProduct("Version 12", 		"Edge Tech Java",	 		"java.png");
-		createProduct("Must know!",			"Edge Tech JavaScript", 	"javascript.png");
-		createProduct("No SQL",			 	"Edge Tech MongoDB", 		"mongodb.png");
-		createProduct("CREATE Database X",	"Edge Tech MySQL", 			"mysql.png");
-		createProduct("@Cool",			 	"Edge Tech Spring Boot", 	"spring.png");
-		createProduct("SELECT * FROM",		"Edge Tech SQL", 			"sql.png");
+		createProduct("12345", 	"Edge Tech Agile", 			"/images/agile.png"		);
+		createProduct("02468",	"Edge Tech C#", 			"/images/csharp.png"	);
+		createProduct("13579",	"Edge Tech CSS", 			"/images/css.png"		);
+		createProduct("024816",	"Edge Tech HTML5", 			"/images/html.png" 		);
+		createProduct("54321", 	"Edge Tech Java 1.8", 		"/images/java.png"		);
+		createProduct("00001", 	"Edge Tech JavaScript", 	"/images/javascript.png");
+		createProduct("ABCDE",	"Edge Tech MongoDB", 		"/images/mongodb.png"	);
+		createProduct("AEIOU", 	"Edge Tech MySQL",		 	"/images/mysql.png"		);
+		createProduct("VWXYZ",	"Edge Tech Spring Boot",	"/images/spring.png"	);
+		createProduct("KLMNO",	"Edge Tech SQL", 			"/images/sql.png"		);
 	}
 
 	/*
@@ -51,10 +51,8 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
 
 		//	TODO 	this is only needed if you are creating and dropping the database with each run
 		//		otherwise you are adding records to your database over and over again
-		float price = (int)((Math.random() * 5000) + 2000);
-		price /= 100;
-		product = new Product(productId, description, "/images/" + imageUrl, new BigDecimal(price));
-		productService.add(product);		//	turned off for now to not keep creating Product records
+		product = new Product(productId, description, imageUrl, new BigDecimal(Math.random() * 50 + 10));
+		productService.add(product);		//	comment to stop creating Product records
 		log.info(product);
 	}
 }

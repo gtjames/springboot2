@@ -1,11 +1,12 @@
 package edu.edgetech.sb2.services;
 
-import edu.edgetech.sb2.models.Customer;
-import edu.edgetech.sb2.repositories.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+		import edu.edgetech.sb2.models.Customer;
+		import edu.edgetech.sb2.repositories.CustomerRepository;
+		import org.springframework.beans.factory.annotation.Autowired;
+		import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+		import java.util.Iterator;
+		import java.util.Optional;
 
 /**
  * 	TODO The CustomerService object provides access to the Customer entity in the database
@@ -53,4 +54,13 @@ public class CustomerService {
 		return customerRepository.findByPhoneNum(phoneNum);
 	}
 
+	public Iterable<Customer> listOddCustomers() {
+		Iterable<Customer> Customers = customerRepository.findAll();
+		for(Iterator<Customer> prodIterator = Customers.iterator(); prodIterator.hasNext();) {
+			Customer prod = prodIterator.next();
+			if ((prod.getId() & 1) == 0)		// if the Id is Even
+				prodIterator.remove();			// remove from our list
+		}
+		return Customers;
+	}
 }
