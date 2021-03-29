@@ -12,18 +12,21 @@ import org.springframework.stereotype.Component;
 import java.io.InputStream;
 import java.net.URL;
 
+//	@Component registers this class with Spring -- meaning SB will manage it (create it)
 @Component
+//							implements ApplicationListener necessary to initialize the app
 public class CustomerLoader implements ApplicationListener<ContextRefreshedEvent> {
-	@Autowired
+	@Autowired			//  @Autowired	Use dependency injection to initialize this variable
 	private CustomerService customerService;
 
 	private static final Logger log = LogManager.getLogger(ProductLoader.class);
 
-	@Override
+	@Override			//	@Override  my application will create a new version of this method
+						//	this method is called when the application wakes up
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 
 		//	add in as many dummy records as you would like
-		createCustomer("Edge Tech Academy", "2242 S Watson Rd",		 	"682-334-5679");
+		createCustomer("Edge Tech Academy", "2241 S Watson Rd",		 	"682-334-5679");
 		createCustomer("Apple Computers", 	"1 Infinite Loop Lane", 	"682-334-5679");
 		createCustomer("Ancora Education", 	"8701 Bedford-Euless Rd", 	"682-334-5679");
 		createCustomer("American Airlines", "1 American Airlines Rd",	"682-334-5679");

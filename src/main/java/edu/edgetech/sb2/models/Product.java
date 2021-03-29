@@ -17,7 +17,7 @@ public class Product {
     private String productId;
     private String description;
     private String imageUrl;
-    private BigDecimal price;
+    private float price;
     private String category;
 
     @Override
@@ -33,7 +33,7 @@ public class Product {
                 '}';
     }
 
-    public Product(String productId, String description, String imageUrl, BigDecimal price) {
+    public Product(String productId, String description, String imageUrl, float price) {
         this.productId = productId;
         this.description = description;
         this.imageUrl = imageUrl;
@@ -92,11 +92,11 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
-    public BigDecimal getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 }

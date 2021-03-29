@@ -2,7 +2,8 @@ package edu.edgetech.sb2.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.edgetech.sb2.models.*;
-import org.springframework.stereotype.Controller;
+import edu.edgetech.sb2.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
@@ -10,13 +11,21 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/api")
 public class ApiController {
 
     Pet     pet;
+
+    @Autowired
+    //	@Autowired will request SpringBoot to find the ProductService class and instantiate one for us
+    //	and assign (INJECT) the class property with the value. This is Dependency Injection.
+    //	our class depends on this service
+    private ProductService productService;
 
     @RequestMapping("/pet")
     @ResponseBody
@@ -95,8 +104,7 @@ public class ApiController {
     }
 
     @RequestMapping("/weather/{city}")
-    @ResponseBody
-    public String weather(@PathVariable String city) {
+    public Weather weather(@PathVariable String city) {
         Weather weather = null;
         ObjectMapper mapper = new ObjectMapper();
 
@@ -110,31 +118,21 @@ public class ApiController {
         }
         catch ( Exception e ) { System.out.println(e); }
 
-        return weather.toString();
+        return weather;
     }
 
-    /**
-     * 		TODO	The rest of these endpoints are for educational purposes
-     * 				All of these endpoints are annotated with @ResponseBody. This means what ever we return
-     * 				with the return statement is exactly and only what will be displayed in the browser.
-     * 				This makes for some great experimentation	.
-     *
-     * 				/api/string/{any text we want}
-     * 					assigns the text following /product/string/{XXXXXX} to the line parameter
-     * 					Then we can do whatever is required with that data
-     *
-     *				/api/query?id={some text}&string={some other text}&number={an optional NUMBER}
-     *					This endpoint has three possible parameters passed to it.
-     *					The first two are required and number is optional
-     *
-     *				/api/vowels/{some text}
-     *					we are going to count the vowels in the string passed into the endpoint
-     *					along the way we will also save the consonants that are obviously not vowels
-     *
-     *				/api/tree/{how many limbs}
-     *					let's practice for that job interview question
-     *
-     */
+    @RequestMapping("/json/{id}")
+    public Product getJson(@PathVariable Integer id){
+        return productService.getProductById(id);
+    }
+
+    @RequestMapping("/json/all")
+    public List<Product> getAll(){
+        List<Product> prods = new ArrayList<>();
+        productService.listAllProducts().forEach(prods::add);
+        return prods;
+    }
+
     @RequestMapping(value = "/string/{line}")
     @ResponseBody
     public String result(@PathVariable String line) {

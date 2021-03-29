@@ -30,6 +30,8 @@ public class NotificationService {
         mail.setSubject("Houston, Tranquility Base here!");
         mail.setText("We have landed!");
 
+        double pi = Math.PI;
+
         javaMailSender.send(mail);
     }
 }

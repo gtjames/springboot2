@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+//	@Controller registers this class with Spring -- meaning SB will manage it (create it)
 @Controller
+//
 @RequestMapping("/customer")
 public class CustomerController {
 

@@ -13,13 +13,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 	ProductController
- * 			Controller		This annotates the ProductController class as a Spring MVC object
+ * 			@Controller		This annotates the ProductController class as a Spring MVC object
  * 							It is intelligent about resolving requests from the browser
- * 			RequestMapping	By adding "/product" to the ProductController class we in effect
+ * 			@RequestMapping	By adding "/product" to the ProductController class we in effect
  * 							add /product to the start of EVERY request handeled by ProductController
  * 							Each RequestMapping for the class methods will respond to the value specified
  * 							with /product in front. This allows us to change the ProductController RequestMapping
@@ -30,7 +32,7 @@ import java.util.List;
 public class ProductController {
 
 	/**
-	 * 		Autowired		When the ProductController object is created the productService attribute will be set by Spring
+	 * 		@Autowired		When the ProductController object is created the productService attribute will be set by Spring
 	 * 						This is dependency injection. The ProductController depends on a connection to the ProductService
 	 * 						Spring will see to it that the service is instantiated (created) and set before any requests are made
 	 * 						of the ProductController. So the ProductService which provides access to the Product entity in our
@@ -42,8 +44,9 @@ public class ProductController {
 	 * 			up the data access methods we want our programs to use.
 	 */
 	//	Use a service for when things get complicated more than just doing a findAll or delete.
-	//	We could go directly to the Entity Repository object (ProductReposity). It is after all a CrudRepository.
+	//	We could go directly to the Entity Repository object (ProductRepository). It is after all a CrudRepository.
 	//	So it is very knowledgeable about accessing a database entity.
+	//	but it is TOO powerful. for instance it can delete ALL records in the DB
 	// 	But we have a better separation of concerns
 	//	when we split the DB request servicing functions to a separate 'Service' class
 	@Autowired		//	@Autowired will request SpringBoot to find the ProductService class and instantiate one for us

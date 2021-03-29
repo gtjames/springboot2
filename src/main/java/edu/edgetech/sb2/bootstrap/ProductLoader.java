@@ -51,7 +51,7 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
 
 		//	TODO 	this is only needed if you are creating and dropping the database with each run
 		//		otherwise you are adding records to your database over and over again
-		product = new Product(productId, description, imageUrl, new BigDecimal(Math.random() * 50 + 10));
+		product = new Product(productId, description, imageUrl, (float)Math.random() * 50 + 10);
 		productService.add(product);		//	comment to stop creating Product records
 		log.info(product);
 	}

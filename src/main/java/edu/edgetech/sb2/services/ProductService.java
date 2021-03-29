@@ -56,7 +56,7 @@ public class ProductService {
 		Iterable<Product> products = productRepository.findAll();
 		for(Iterator<Product> prodIterator = products.iterator(); prodIterator.hasNext();) {
 			Product prod = prodIterator.next();
-			if ((prod.getId() & 1) == 0)		// if the Id is Even
+			if ((prod.getId() % 2) == 1)		// if the Id is Even
 				prodIterator.remove();			// remove from our list
 		}
 		return products;
